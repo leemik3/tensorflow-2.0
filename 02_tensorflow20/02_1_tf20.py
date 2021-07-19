@@ -64,6 +64,7 @@ x = Dense(4, activation='relu')(x)  # 은닉층 2
 x = Dense(1, activation='softmax')(x)  # 출력층
 model = Model(inputs, x)
 
+
 # Model Subclassing API
 class ResNet(tf.keras.Model):
     def __init__(self):
