@@ -21,11 +21,26 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+# GPU 작업 중복 문제 - 싱글 gpu 사용 시 해결 방안
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        # Currently, memory growth needs to be the same across GPUs
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+    except RuntimeError as e:
+        # Memory growth must be set before GPUs have been initialized
+        print(e)
+
+
 model = tf.keras.Sequential([
     hub.KerasLayer('https://tfhub.dev/google/imagenet/resnet_v2_152/feature_vector/4',
-                   input_shape=(224,224,3),
+                   input_shape=(224, 224, 3),
                    trainable=False),
-    tf.keras.layers.Dense(2, actication='softmax')
+    tf.keras.layers.Dense(2, activation='softmax')
 ])
 
 
@@ -98,7 +113,7 @@ plt.title('오차')
 # 이미지에 대한 예측 확인
 class_names=['cat','dog']
 validation, label_batch = next(iter(valid_generator))
-prediction_values = model.prdict_classes(validation)
+prediction_values = model.predict_classes(validation)
 
 fig = plt.figure(figsize=(12,8))
 fig.subplots_adjust(left=0, right=1, bottom=0, top=1, hspace=0.05, wspace=0.05)
@@ -110,3 +125,4 @@ for i in range(8):
         ax.text(3, 17, class_names[prediction_values[i]], color='yellow', fontsize=14)
     else:
         ax.text(3, 17, class_names[prediction_values[i]], color='red', fontsize=14)
+
