@@ -211,3 +211,4 @@ model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.1), loss='mse')
 
 
 ### height, width, channel, length 관계 정리
+ex) Conv2D(~, input_shape=(<행>,<열>,<채널 개수>))
