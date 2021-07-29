@@ -210,5 +210,28 @@ model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.1), loss='mse')
 ### Conv1D, Conv2D, Conv3D 데이터 형태 정리
 
 
-### height, width, channel, length 관계 정리
+### height, width, channel, length, depth 관계 정리
 ex) Conv2D(~, input_shape=(<행>,<열>,<채널 개수>))
+
+---
+
+# 가중치 초기화 방법
+```angular2html
+Conv2D(~, kernel_initializer = ~)
+```
+### 1. 확률 분포 기반의 가중치 초기화
+특정한 확률 분포에 기반하여 랜덤한 값을 추출하여 가중치를 초기화
+- 균일 분포
+- 정규 분포
+
+### 2. 분산 조정 기반의 초기화
+확률 분포를 기반으로 추출한 값으로 가중치를 초기화하되, 이 확률 분포의 분산을 가중치별로 동적 조절
+- LeCun 초기화 방식
+    - lecun_uniform
+    - lecun_normal
+- Xavier 초기화 방식
+    - glorot_uniform
+    - glorot_normal
+- He 초기화 방식
+    - he_unifrom
+    - he_normal

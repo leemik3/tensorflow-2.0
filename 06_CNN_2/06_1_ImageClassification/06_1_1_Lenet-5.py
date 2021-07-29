@@ -16,10 +16,8 @@ chapter6. 합성곱 신경망 1
 - 합성곱과 다운 샘플링/풀링을 반복적으로 거치면서 마지막 완전연결층에서 분류 수행
 '''
 
-import numpy as np
+
 import tensorflow as tf
-import matplotlib.pyplot as plt
-from tensorflow.keras import Model
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, AveragePooling2D, Flatten, Dense
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
