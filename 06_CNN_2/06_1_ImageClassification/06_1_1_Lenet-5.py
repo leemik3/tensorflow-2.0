@@ -23,6 +23,7 @@ from tensorflow.keras.layers import Conv2D, AveragePooling2D, Flatten, Dense
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
+
 # GPU 작업 중복 문제 - 싱글 gpu 사용 시 해결 방안
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -122,13 +123,15 @@ model.fit(
 )
 
 '''
-텐서보드 작동
+텐서보드 작동 - 프롬프트에 입력
 
 [Trouble Shooting]
 
 >>> tensorboard --logdir=../../data/chap6/img/log6-1/
 - 오류 발생
 
->> tensorboard --logdir=D:\git\tensorflow-2.0\data\chap6\img\log6-1\train
+>> tensorboard --logdir=D:\git\tensorflow-2.0\data\chap6\img\log6-1\
 - 절대 경로 입력해서 해결
 '''
+
+

@@ -225,13 +225,49 @@ Conv2D(~, kernel_initializer = ~)
 - 정규 분포
 
 ### 2. 분산 조정 기반의 초기화
-확률 분포를 기반으로 추출한 값으로 가중치를 초기화하되, 이 확률 분포의 분산을 가중치별로 동적 조절
-- LeCun 초기화 방식
+확률 분포를 기반으로 추출한 값으로 가중치를 초기화하되, 이 확률 분포의 분산을 가중치별로 동적으로 조절한다.   
+분산을 조절할 때는 해당 가중치에 입력으로 들어오는 텐서의 차원 (fan in)과 결괏값으로 출력하는 텐서의 차원(fan out)이 사용된다. 
+- LeCun 초기화 방식 : 입력 값의 크기가 커질 수록 초기화 값의 분산을 작게 만든다.
     - lecun_uniform
     - lecun_normal
-- Xavier 초기화 방식
+- Xavier 초기화 방식 : fan in과 fan out을 모두 고려하여 확률 분포 계산
     - glorot_uniform
     - glorot_normal
-- He 초기화 방식
+- He 초기화 방식 : Xavier의 한계를 극복하려고 제안된 기법. fan out 보다 fan in 에 집중한 가중치
     - he_unifrom
     - he_normal
+    
+---
+
+# 짚고 넘어가는 것들
+어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
+
+### 2021.07.29
+1. ```super().__init__()``` 
+[클래스, 상속, 오버라이딩의 개념](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
+
+2. ```Conv2D(kernel_initializer='he_normal')```
+[가중치 초기화 방법 개념](https://github.com/leemik3/tensorflow-2.0/#%EA%B0%80%EC%A4%91%EC%B9%98-%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B0%A9%EB%B2%95)
+   
+3. ```Conv2D(padding='valid)```   
+padding='valid' : 패딩 없음   
+padding='same' : 입력과 출력의 크기가 같도록 패딩
+
+4.   
+- log_dir = '../../data/chap6/img/log6-2/'   
+- log_dir = '../../data/chap6/img/log6-2'   
+- log_dir = 'D:\git\tensorflow-2.0\data\chap6\img\log6-1\train   
+마지막에 '/' 여부, 상대 경로와 절대 경로가 어떤 차이? 
+
+### 2021.07.30
+1. ```MaxPooling2D(data_format='channels_last)``` : 입력 형식을 설정하는 파라미터   
+channels_last : 입력 데이터 형식이  (배치 크기, 높이, 너비, 채널개수)  
+channels_first : 입력 데이터 형식이 (배치 크기, 채널개수, 높이, 너비)
+   
+2. strides=2 와 strides=(2,2)
+: Conv2D에서 차이 없는 듯? 정확히 모름
+
+3. ```flow_from_directory```   
+: return (x,y)   
+x : (batch_size, target_size, channels) 크기의 이미지  
+y : labels
