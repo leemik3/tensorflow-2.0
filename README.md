@@ -215,6 +215,11 @@ ex) Conv2D(~, input_shape=(<행>,<열>,<채널 개수>))
 
 ---
 
+### 기울기 소멸 / 소실 문제 (Vanishing Gradient Problem)
+
+
+---
+
 # 가중치 초기화 방법
 ```angular2html
 Conv2D(~, kernel_initializer = ~)
@@ -279,3 +284,4 @@ y : labels
 2. 1x1 합성곱의 의미? 무의미하다고 생각했음   
 : 이미지 크기는 변함이 없는 게 맞음, 채널 수를 줄여서 파라미터를 줄여주는 효과
 
+3. ResNet의 Residual : shortcut, 기울기 소실 문제를 해결하는 방식의 수학적인 부분이 잘 이해되지 않음
