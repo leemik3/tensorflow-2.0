@@ -268,7 +268,6 @@ Conv2D(~, kernel_initializer = ~)
     - 불규칙 변동 (irregular variation)
         - 규칙성이 없어 예측 불가능하고 우연적으로 발생하는 변동
         - ex) 전쟁, 홍수, 화재, 지진, 파업   
-<br/>
 - **규칙적 시계열** : 트렌드와 분산이 불변
     - 추세 변동 (trend variation)
         - 시계열 자료가 갖는 장기적인 변화 추세   
@@ -293,14 +292,11 @@ Conv2D(~, kernel_initializer = ~)
 - AR 모델 (Auto Regression, 자기 회귀)
     - 이전 관측 값이 이후 관측 값에 영향을 준다는 아이디어
     - 이전 데이터의 **상태**에서 현재 데이터의 상태 추론   
-<br/>
 - MA 모델 (Moving Average, 이동 평균)
     - 트렌드(평균이나 시계열 그래프의 y값)가 변화하는 상황
-    - 이전 데이터의 **오차**에서 현재 데이터의 상태 추론   
-<br/>
+    - 이전 데이터의 **오차**에서 현재 데이터의 상태 추론
 - ARMA 모델 (AutoRegressive Moving Average, 자동 회귀 이동 평균)
     - 윈도우 크기만큼 슬라이딩(moving)   
-<br/>
 - ARIMA 모델 (AutorRegressive Integrated Moving Average, 자동 회귀 누적 이동 평균)
     - ARMA와 달리 과거 데이터의 선형 관계뿐만 아니라 추세(cointegration)까지 고려함
 ---
@@ -317,19 +313,15 @@ Conv2D(~, kernel_initializer = ~)
 1. 일대일
     - 순환이 없기 떄문에 RNN이라고 말하기 어려움
     - EX) 순방향 네트워크   
-<br/>
 2. 일대다
     - 입력이 하나, 출력이 다수
     - EX) image captioning (입력 : 이미지, 출력 : 이미지에 대한 설명 = 문장)   
-<br/>
 3. 다대일
     - 입력이 다수, 출력이 하나
     - EX) 감정 분석기 (입력 : 문장, 출력 : 긍/부정)   
-<br/>
 4. 다대다
     - 입력이 다수, 출력이 다수
     - EX) 자동 번역기   
-<br/>
 5. 동기화 다대다
     - 입력이 다수, 출력이 다수
     - EX) 문장에서 다음에 나올 단어를 예측하는 언어 모델, 프레임 수준의 비디오 분류기
