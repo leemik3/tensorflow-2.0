@@ -331,12 +331,27 @@ RNN 계층 : 입력된 배치 순서열을 모두 처리
 RNN 셀 : 하나의 단계 (timestamp)만 처리
 
 ---
-### RNN 구조
-
-
+### RNN의 역전파 : BPTT
+모든 단계마다 처음부터 끝까지 역전파  
+- 오차가 멀리 전파될 때 : 기울기 소멸 문제 발생 - 해결방안  
+    - truncated BPTT (일정 시점까지만 오류 역전파)  
+    - LSTM  
+    - GRU
+---
+### LSTM
+- RNN의 기울기 소멸 문제 방지
+- 망각 게이트, 입력 게이트, 출력 게이트를 은닉층의 각 뉴런에 추가
+1. **망각 게이트 (forget gate)**
+- 과거 정보를 얼마나 기억할지 결정
+- 과거 정보와 현재 데이터를 입력 받아 시그모이드를 취한 후 그 값을 과거 정보에 곱함 (시그모이드 출력값에 따라 과거 정보를 버리거나 보존)
+2. **입력 게이트(input gate)**
+- 현재 정보를 기억하기 위해 만들어짐
+- 현재 정보에 대한 보존량 결정
+3. **출력 게이트(output gate)**
+- 과거 정보와 현재 데이터를 사용하여 뉴런의 출력을 결정
 ---
 
-# 짚고 넘어가는 것들
+# Check
 어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
 
 ### 2021.07.29
@@ -385,3 +400,13 @@ y : labels
 1. 공간 피라미드 풀링, R-CNN, Fast R-CNN, Faster R-CNN 잘 이해되지 않았음... 논문을 읽어봐?
 
 2. 완전연결층의 한계 : 고정된 크기의 입력만 받아들이며, 완전연결층을 거친 후에는 위치 정보가 사라진다. 
+
+### 2021.08.05
+1. 가정설정문 assert : 뒤의 조건이 거짓일 경우 에러 발생시킴
+2. ```tf.keras.preprocessing.sequence.pad_sequences```  
+   : Transforms a **list** (길이 : num_samples) of sequences (lists of integers)   
+   into a **2D Numpy array** of shape (num_samples, num_timesteps)
+3. ```tf.unstack()```
+4. Tensorslicedataset, Batchdataset, onehotencoding 등 적재적소 데이터 전처리에 대한 이해
+5. __call__ : [매직 메소드](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
+6. '07_3_RNN_Cell.py' 클래스 부분 이해 안 감
