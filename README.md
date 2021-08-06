@@ -350,6 +350,28 @@ RNN 셀 : 하나의 단계 (timestamp)만 처리
 3. **출력 게이트(output gate)**
 - 과거 정보와 현재 데이터를 사용하여 뉴런의 출력을 결정
 ---
+### GRU (Gated Recurrent Unit)
+- 망각 게이트와 입력 게이트를 합친 것
+- 출력 게이트 없음 : 전체 상태 벡터가 매 단계마다 출력됨
+- 게이트 컨트롤러 : 망각 게이트와 입력 게이트를 모두 제어
+    - 1을 출력 : 망각 게이트 열리고, 입력 게이트 닫힘
+    - 0을 출력 : 망각 게이트 닫히고, 입력 게이트 열림
+    
+1. **망각 게이트 (reset gate)**
+- 과거 정보를 적당히 초기화 시키려는 목적
+2. **업데이트 게이트(update gate)**
+- 과거와 현재 정보의 최신화 비율 결정
+3. **후보군**
+- 현시점의 정보에 대한 후보군 계산
+4. **은닉층**
+- 업데이트 결과와 후보군 결과를 결합하여 현시점의 은닉층 계산
+---
+### 양방향 RNN (Bidirectional RNN)
+- 이전 시점 뿐만 아니라 미래 시점의 데이터도 함께 활용
+- 하나의 출력값을 예측하는 데 메모리 셀 두개를 사용
+    - 첫 번째 메모리 셀 : **이전** 시점의 은닉 상태 -> 현재의 은닉 상태 계산
+    - 두 번째 메모리 셀 : **다음** 시점의 은닉 상태 -> 현재의 은닉 상태 계산
+---
 
 # Check
 어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
@@ -410,3 +432,5 @@ y : labels
 4. Tensorslicedataset, Batchdataset, onehotencoding 등 적재적소 데이터 전처리에 대한 이해
 5. __call__ : [매직 메소드](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
 6. '07_3_RNN_Cell.py' 클래스 부분 이해 안 감
+7. ```VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])```  
+: 경고 무시했음
