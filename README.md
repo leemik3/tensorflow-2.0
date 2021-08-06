@@ -1,4 +1,5 @@
 # tensorflow-2.0
+할 거 없을 때 check 빼고 wiki로 옮기기
 
 ### 머신러닝 학습 과정
 학습 단계 : 데이터 → 특성 추출 → 머신러닝 알고리즘 적용 → 분류 / 예측 모델(모형)
@@ -148,6 +149,7 @@ reference : https://wooono.tistory.com/103
 1. 평균 제곱 오차 (MSE)
 - 실제 값과 예측 값의 차이를 제곱하여 평균을 낸 것
 - 작을 수록 예측력이 좋음
+- y가 연속형 변수일 때 주로 사용 
 - 회귀에서 주로 사용됨
 ```angular2html
 model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.1), loss='mse')
@@ -216,6 +218,16 @@ model.compile(optimizer=tf.keras.optimizers.SGD(lr=0.1), loss='mse')
 5. 심층 신뢰 신경망
 
 ---
+### Batch, Iteration, Epoch
+- **batch size**  
+mini batch의 데이터 수, 가중치 1회 갱신 기준   
+- **iteration**  
+한 epoch를 진행하기 위해서 이뤄지는 가중치 갱신 횟수   
+- **epoch**  
+전체 데이터셋에 대해서 1회 학습 기준   
+- batch size * iteration = 전체 데이터 수   
+
+---
 
 # 합성곱 신경망
 
@@ -231,6 +243,14 @@ filter 개수 ≠ filter channel 수
 ---
 
 ### 기울기 소멸 / 소실 문제 (Vanishing Gradient Problem)
+오차 정보를 역전파시키는 과정에서 기울기가 급격히 0에 가까워져 학습이 안 되는 현상  
+- 원인
+    - 내부 공변량 변화 (internal covariance shift) : 네트워크의 각 층마다 활성화 함수가 적용되면서 입력 값들의 분포가 계속  바뀌는 현상
+- 해결 방법
+    - 손실 함수로 ReLU 사용
+    - 초깃값 튜닝
+    - 학습률 조정
+    - 배치 정규화
 
 
 ---
@@ -372,7 +392,85 @@ RNN 셀 : 하나의 단계 (timestamp)만 처리
     - 첫 번째 메모리 셀 : **이전** 시점의 은닉 상태 -> 현재의 은닉 상태 계산
     - 두 번째 메모리 셀 : **다음** 시점의 은닉 상태 -> 현재의 은닉 상태 계산
 ---
+# 성능 최적화 (Optimization) 방법
+### 데이터를 사용
+1. 최대한 많은 데이터 수집
+2. 데이터 생성  
+: EX) ImageDataGenerator
+3. 데이터 범위(scale) 조정하기  
+시그모이드 : 0~1  
+tanh : -1~1  
+정규화, 규제화, 표준화
+### 알고리즘을 이용
+서로 다른 알고리즘들은 선택하여 훈련시켜 보고 성능이 가장 좋은 모델을 선택하기
+### 알고리즘 튜닝을 위한 성능 최적화
+가장 많은 시간이 소요되는 부분
+- 진단   
+    - overfitting (훈련 성능 >> 검증 성능) -> 규제화  
+    - underfitting (훈련 성능, 검증 성능 ↓) -> 네트워크 구조 변경, 에포크 수 조정  
+    - 훈련 성능이 검증을 넘어서는 변곡점에서 조기 종료 고려
+- 가중치 
+    - 초깃값 : 작은 난수
+    - 초깃값 : 오토인코더 같은 비지도 학습을 이용하여 사전 훈련(가중치 정보를 얻기 위함)을 진행한 후 지도 학습을 진행하는 것도 방법
+- 학습률
+    - 모델의 네트워크 구성에 따라 다르기 때문에 매우 크거나 작은 임의의 난수를 선택하고 조금씩 변경해야 함.
+    - 네트워크 계층 ↑ 학습률 ↑, 네트워크 계층 ↓ 학습률 ↓
+- 활성화 함수
+    - **활성화 함수**를 변경할 땐 **손실 함수**와 함께 변경해야 하는 경우가 많으므로 신중해야 함
+    - 일반적) 활성화 함수 : 시그모이드, tanh / 출력층에서는 softmax나 sigmoid 많이 사용함
+- 배치와 에포크
+    - 최근 트렌드 : 큰 에포크와 작은 배치
+    - 다양한 테스트 진행해보기
+- 옵티마이저 및 손실 함수
+    - 일반적) 옵티마이저 : 확률적 경사 하강법
+    - Adam, RMSProp
+    - 다양한 테스트 진행해보기
+- 네트워크 구성 (네트워크 토폴로지 / topology)
+    - 너비와 깊이 조절
 
+### 앙상블을 이용
+간단히 모델을 두 개 이상 섞어서 사용하기
+### 하드웨어(GPU)를 이용
+Windows 환경 : GPU용 텐서플로를 설치하려면 **CUDA**와 **cuDNN** 설치
+- CUDA (Computed Unified Device Architecture) : NVIDIA에서 개발한 GPU 개발 툴
+- GPU 설치 확인 : ```nvidia -smi```
+### 하이퍼파라미터를 이용
+- **배치 정규화**
+    - 매 단계마다 활성화 함수를 거치면서 데이터셋 분포가 일정해지기 때문에 속도를 향상시킬 수 있다.
+    - 단점
+        - 배치 크기가 작을 때는 정규화 값이 기존 값과 다른 방향으로 훈련될 수 있다. 분산이 0이면 정규화 자체가 안 됨
+        - RNN은 네트워크 계층 별로 미니 정규화를 적용해야 해서 모델이 더 복잡해지고 비효율적일 수 있다.
+    
+
+---
+### CPU와 GPU
+- 개별적 코어 속도 : CPU > GPU
+- **CPU** : 명령어가 입력되는 순서대로 데이터를 처리하는 직렬 처리 방식  
+산술논리장치(ALU) : 연산을 담당  
+컨트롤 (control) : 명령어를 해석하고 실행  
+캐시 (cache) : 데이터를 담아 둠
+    - 순차적 연산에 적합
+- **GPU** (Graphics Processing Units): 서로 다른 명령어를 동시에 병렬 처리  
+ALU 개수가 많아지고, 캐시 메모리 비중이 낮아짐 (데이터를 담아두지 않고 명령어 많이 처리)
+    - 역전파처럼 복잡한 미적분은 병렬 연산을 해야 속도가 빨라짐
+---
+### 정규화, 규제화, 표준화
+- **정규화 (normalization)**
+    - 데이터 범위를 사용자가 원하는 범위로 제한하는 것
+    - 특성 스케일링 : 각 특성 범위를 조정한다는 의미
+    - ```MinMaxScaler()```
+- **규제화 (regularization)**
+    - 모델 복잡도를 줄이기 위해 제약을 두는 방법
+    - 데이터가 네트워크에 들어가기 전에 **필터**가 적용된 것이라고 생각하면 됨
+    - 규제를 이용하여 모델 복잡도를 줄이는 방법 : 드롭아웃, 조기 종료
+- **표준화 (standardization)**
+    - 평균은 0, 표준편차는 1 인 데이터로 만들기
+    - 다른 표현 : 표준화 스칼라 (standard scalar), z-스코어 정규화 (z-score normalization)
+---
+### Unit, input_shape 정리
+```Dense(64, input_shape=(4,), activation='relu')```
+
+---
 # Check
 어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
 
@@ -434,3 +532,9 @@ y : labels
 6. '07_3_RNN_Cell.py' 클래스 부분 이해 안 감
 7. ```VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])```  
 : 경고 무시했음
+   
+### 2021.08.06
+1. ```Dense(64, input_shape=(4,), activation='relu')```  
+- 유닛이 64개인건 이해 됨.
+- (입력층이) (4,0) 형태를 가진다고 책에 써있음. 처음에는 4가 batch size, 데이터 크기인가 싶었는데, 데이터 1개가 (4,0) 형태,, 컬럼 개수인가? 싶었음... 계속 헷갈림 이게
+   
