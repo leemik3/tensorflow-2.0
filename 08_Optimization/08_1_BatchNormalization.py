@@ -142,3 +142,44 @@ model2 = Sequential([
 model2.summary()
 
 
+# 모델 훈련
+model2.compile(
+    optimizer='adam',
+    loss='categorical_crossentropy',
+    metrics=['accuracy']
+)
+
+history2 = model2.fit(
+    X_train,
+    y_train,
+    epochs=1000,
+    validation_split=0.25,
+    batch_size=40,
+    verbose=2
+)
+
+
+# 훈련 결과 시각화
+fig, loss_ax = plt.subplots()
+
+acc_ax = loss_ax.twinx()
+
+loss_ax.plot(history2.history['loss'], 'y', label='train loss')
+loss_ax.plot(history2.history['val_loss'], 'r', label='val loss')
+
+acc_ax.plot(history2.history['accuracy'], 'b', label='train acc')
+acc_ax.plot(history2.history['val_accuracy'], 'g', label='val acc')
+
+loss_ax.set_xlabel('epoch')
+loss_ax.set_ylabel('loss')
+acc_ax.set_ylabel('accuracy')
+
+loss_ax.legend(loc='lower right')
+acc_ax.legend(loc='upper right')
+plt.show()
+
+
+# 모델 평가
+loss_and_metrics = model2.evaluate(X_test, y_test)
+print("손실과 정확도 평가")
+print(loss_and_metrics)
