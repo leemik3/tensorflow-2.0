@@ -482,6 +482,15 @@ ALU 개수가 많아지고, 캐시 메모리 비중이 낮아짐 (데이터를 �
 ```Dense(64, input_shape=(4,), activation='relu')```
 
 ---
+# Clustering
+- K-means clustering
+- Gaussian Mixture Model
+- 자기 조직화 지도 (SOM: Self-Organizing Map)
+---
+### K-means clustering
+
+
+---
 # Check
 어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
 
@@ -557,3 +566,4 @@ y : labels
 ### 2021.08.09
 1. ```tf.keras.callbacks.ModelCheckpoint``` 콜백 함수 : 훈련 중간 / 마지막에 체크포인트 사용
 2. ```sequence.pad_sequences(x_train, maxlen=maxlen)``` 0으로 시퀀스를 채움
+
