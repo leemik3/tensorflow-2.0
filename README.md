@@ -1,4 +1,4 @@
-# tensorflow-2.0
+# tensorflow-2.0 확인
 할 거 없을 때 check 빼고 wiki로 옮기기
 
 ### 머신러닝 학습 과정
