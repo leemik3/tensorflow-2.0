@@ -1,4 +1,4 @@
-# tensorflow-2.0 확인
+# tensorflow-2.0
 할 거 없을 때 check 빼고 wiki로 옮기기
 
 ### 머신러닝 학습 과정
@@ -447,6 +447,11 @@ Windows 환경 : GPU용 텐서플로를 설치하려면 **CUDA**와 **cuDNN** �
         - 배치 크기가 작을 때는 정규화 값이 기존 값과 다른 방향으로 훈련될 수 있다. 분산이 0이면 정규화 자체가 안 됨
         - RNN은 네트워크 계층 별로 미니 정규화를 적용해야 해서 모델이 더 복잡해지고 비효율적일 수 있다.
     
+- **드롭아웃 (Dropout)**
+    - 훈련 시간이 길어지지만, 모델 성능 향상에 자주 쓰는 방법
+
+- **조기종료 (Early Stopping)**
+    - 검증에 대한 손실이 증가하는 시점에서 훈련 멈추도록 조정
 
 ---
 ### CPU와 GPU
@@ -548,3 +553,7 @@ y : labels
 1. ```tfds.load``` : ProfetchDataset,, for 문으로 출력하면 내용 볼 수 있음
 2. ```padded_batch()``` : 배치에서 가장 긴 문자열의 길이를 기준으로 시퀀스를 0으로 채움
 3. ```shuffle``` : ??
+
+### 2021.08.09
+1. ```tf.keras.callbacks.ModelCheckpoint``` 콜백 함수 : 훈련 중간 / 마지막에 체크포인트 사용
+2. ```sequence.pad_sequences(x_train, maxlen=maxlen)``` 0으로 시퀀스를 채움
