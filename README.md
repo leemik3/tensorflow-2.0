@@ -567,3 +567,6 @@ y : labels
 1. ```tf.keras.callbacks.ModelCheckpoint``` 콜백 함수 : 훈련 중간 / 마지막에 체크포인트 사용
 2. ```sequence.pad_sequences(x_train, maxlen=maxlen)``` 0으로 시퀀스를 채움
 
+### 2021.08.10
+1. ```glob.glob('<경로>'')``` : 해당 경로에 잇는 모든 폴더 및 파일을 **리스트**로 반환
+2. 
