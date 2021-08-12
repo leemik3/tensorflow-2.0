@@ -1,3 +1,84 @@
+# Check
+어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
+
+### 2021.07.29
+1. ```super().__init__()``` 
+[클래스, 상속, 오버라이딩의 개념](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
+
+2. ```Conv2D(kernel_initializer='he_normal')```
+[가중치 초기화 방법 개념](https://github.com/leemik3/tensorflow-2.0/#%EA%B0%80%EC%A4%91%EC%B9%98-%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B0%A9%EB%B2%95)
+   
+3. ```Conv2D(padding='valid)```   
+padding='valid' : 패딩 없음   
+padding='same' : 입력과 출력의 크기가 같도록 패딩
+
+4. 경로 - 마지막에 '/' 여부, 상대 경로와 절대 경로가 어떤 차이?
+- log_dir = '../../data/chap6/img/log6-2/'   
+- log_dir = '../../data/chap6/img/log6-2'   
+- log_dir = 'D:\git\tensorflow-2.0\data\chap6\img\log6-1\train   
+ 
+
+### 2021.07.30
+1. ```MaxPooling2D(data_format='channels_last)``` : 입력 형식을 설정하는 파라미터   
+channels_last : 입력 데이터 형식이  (배치 크기, 높이, 너비, 채널개수)  
+channels_first : 입력 데이터 형식이 (배치 크기, 채널개수, 높이, 너비)
+   
+2. strides=2 와 strides=(2,2)
+: Conv2D에서 차이 없는 듯? 정확히
+
+3. ```flow_from_directory```   
+: return (x,y)   
+x : (batch_size, target_size, channels) 크기의 이미지  
+y : labels
+   
+### 2021.07.31
+1. OOM (Out Of Memory)   
+: 학습시키지 않고.. 근데 compile 생략했는데 compile과 train 차이,,?    
+   가중치 로드하면 안 뜰 줄 알았는데 여전히 OOM 뜸
+
+2. 1x1 합성곱의 의미? 무의미하다고 생각했음   
+: 이미지 크기는 변함이 없는 게 맞음, 채널 수를 줄여서 파라미터를 줄여주는 효과
+
+3. ResNet의 Residual : shortcut, 기울기 소실 문제를 해결하는 방식의 수학적인 부분이 잘 이해되지 않음
+
+4. MaxPooling layer 를 거치면 spatial information 정보가 손실됨
+
+### 2021.08.01
+1. 공간 피라미드 풀링, R-CNN, Fast R-CNN, Faster R-CNN 잘 이해되지 않았음... 논문을 읽어봐?
+
+2. 완전연결층의 한계 : 고정된 크기의 입력만 받아들이며, 완전연결층을 거친 후에는 위치 정보가 사라진다. 
+
+### 2021.08.05
+1. 가정설정문 assert : 뒤의 조건이 거짓일 경우 에러 발생시킴
+2. ```tf.keras.preprocessing.sequence.pad_sequences```  
+   : Transforms a **list** (길이 : num_samples) of sequences (lists of integers)   
+   into a **2D Numpy array** of shape (num_samples, num_timesteps)
+3. ```tf.unstack()```
+4. Tensorslicedataset, Batchdataset, onehotencoding 등 적재적소 데이터 전처리에 대한 이해
+5. __call__ : [매직 메소드](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
+6. '07_3_RNN_Cell.py' 클래스 부분 이해 안 감
+7. ```VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])```  
+: 경고 무시했음, 동작은 됨
+   
+### 2021.08.06
+1. ```Dense(64, input_shape=(4,), activation='relu')```  
+- 유닛이 64개인건 이해 됨.
+- (입력층이) (4,0) 형태를 가진다고 책에 써있음. 처음에는 4가 batch size, 데이터 크기인가 싶었는데, 데이터 1개가 (4,0) 형태,, 컬럼 개수인가? 싶었음... 계속 헷갈림 이게
+
+### 2021.08.07
+1. ```tfds.load``` : ProfetchDataset,, for 문으로 출력하면 내용 볼 수 있음
+2. ```padded_batch()``` : 배치에서 가장 긴 문자열의 길이를 기준으로 시퀀스를 0으로 채움
+3. ```shuffle``` : ??
+
+### 2021.08.09
+1. ```tf.keras.callbacks.ModelCheckpoint``` 콜백 함수 : 훈련 중간 / 마지막에 체크포인트 사용
+2. ```sequence.pad_sequences(x_train, maxlen=maxlen)``` 0으로 시퀀스를 채움
+
+### 2021.08.10
+1. ```glob.glob('<경로>'')``` : 해당 경로에 있는 모든 폴더 및 파일을 **리스트**로 반환
+
+---
+
 # tensorflow-2.0
 할 거 없을 때 check 빼고 wiki로 옮기기
 
@@ -489,84 +570,3 @@ ALU 개수가 많아지고, 캐시 메모리 비중이 낮아짐 (데이터를 �
 ---
 ### K-means clustering
 
-
----
-# Check
-어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
-
-### 2021.07.29
-1. ```super().__init__()``` 
-[클래스, 상속, 오버라이딩의 개념](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
-
-2. ```Conv2D(kernel_initializer='he_normal')```
-[가중치 초기화 방법 개념](https://github.com/leemik3/tensorflow-2.0/#%EA%B0%80%EC%A4%91%EC%B9%98-%EC%B4%88%EA%B8%B0%ED%99%94-%EB%B0%A9%EB%B2%95)
-   
-3. ```Conv2D(padding='valid)```   
-padding='valid' : 패딩 없음   
-padding='same' : 입력과 출력의 크기가 같도록 패딩
-
-4. 경로 - 마지막에 '/' 여부, 상대 경로와 절대 경로가 어떤 차이?
-- log_dir = '../../data/chap6/img/log6-2/'   
-- log_dir = '../../data/chap6/img/log6-2'   
-- log_dir = 'D:\git\tensorflow-2.0\data\chap6\img\log6-1\train   
- 
-
-### 2021.07.30
-1. ```MaxPooling2D(data_format='channels_last)``` : 입력 형식을 설정하는 파라미터   
-channels_last : 입력 데이터 형식이  (배치 크기, 높이, 너비, 채널개수)  
-channels_first : 입력 데이터 형식이 (배치 크기, 채널개수, 높이, 너비)
-   
-2. strides=2 와 strides=(2,2)
-: Conv2D에서 차이 없는 듯? 정확히
-
-3. ```flow_from_directory```   
-: return (x,y)   
-x : (batch_size, target_size, channels) 크기의 이미지  
-y : labels
-   
-### 2021.07.31
-1. OOM (Out Of Memory)   
-: 학습시키지 않고.. 근데 compile 생략했는데 compile과 train 차이,,?    
-   가중치 로드하면 안 뜰 줄 알았는데 여전히 OOM 뜸
-
-2. 1x1 합성곱의 의미? 무의미하다고 생각했음   
-: 이미지 크기는 변함이 없는 게 맞음, 채널 수를 줄여서 파라미터를 줄여주는 효과
-
-3. ResNet의 Residual : shortcut, 기울기 소실 문제를 해결하는 방식의 수학적인 부분이 잘 이해되지 않음
-
-4. MaxPooling layer 를 거치면 spatial information 정보가 손실됨
-
-### 2021.08.01
-1. 공간 피라미드 풀링, R-CNN, Fast R-CNN, Faster R-CNN 잘 이해되지 않았음... 논문을 읽어봐?
-
-2. 완전연결층의 한계 : 고정된 크기의 입력만 받아들이며, 완전연결층을 거친 후에는 위치 정보가 사라진다. 
-
-### 2021.08.05
-1. 가정설정문 assert : 뒤의 조건이 거짓일 경우 에러 발생시킴
-2. ```tf.keras.preprocessing.sequence.pad_sequences```  
-   : Transforms a **list** (길이 : num_samples) of sequences (lists of integers)   
-   into a **2D Numpy array** of shape (num_samples, num_timesteps)
-3. ```tf.unstack()```
-4. Tensorslicedataset, Batchdataset, onehotencoding 등 적재적소 데이터 전처리에 대한 이해
-5. __call__ : [매직 메소드](https://github.com/leemik3/python/wiki/%ED%81%B4%EB%9E%98%EC%8A%A4(class))
-6. '07_3_RNN_Cell.py' 클래스 부분 이해 안 감
-7. ```VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])```  
-: 경고 무시했음, 동작은 됨
-   
-### 2021.08.06
-1. ```Dense(64, input_shape=(4,), activation='relu')```  
-- 유닛이 64개인건 이해 됨.
-- (입력층이) (4,0) 형태를 가진다고 책에 써있음. 처음에는 4가 batch size, 데이터 크기인가 싶었는데, 데이터 1개가 (4,0) 형태,, 컬럼 개수인가? 싶었음... 계속 헷갈림 이게
-
-### 2021.08.07
-1. ```tfds.load``` : ProfetchDataset,, for 문으로 출력하면 내용 볼 수 있음
-2. ```padded_batch()``` : 배치에서 가장 긴 문자열의 길이를 기준으로 시퀀스를 0으로 채움
-3. ```shuffle``` : ??
-
-### 2021.08.09
-1. ```tf.keras.callbacks.ModelCheckpoint``` 콜백 함수 : 훈련 중간 / 마지막에 체크포인트 사용
-2. ```sequence.pad_sequences(x_train, maxlen=maxlen)``` 0으로 시퀀스를 채움
-
-### 2021.08.10
-1. ```glob.glob('<경로>'')``` : 해당 경로에 잇는 모든 폴더 및 파일을 **리스트**로 반환
-2. 
