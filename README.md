@@ -5,7 +5,7 @@
 - 2021/07~ 
 
 # Check
-어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
+- 어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
 
 ### 2021.07.29
 1. ```super().__init__()``` 
@@ -86,6 +86,11 @@ y : labels
 ### 2021.08.12
 1. ```tf.keras.layers.Input(shape=(784,))``` : 입력의 크기 (784, ) 어떤게 784라는 소리인지? 
 2. ```np.prod(array)``` : array 를 product
+
+### 2021.08.13
+1. Inception, GoogLeNet 다시 정리함 : Sparse connection 효과를 주는 inception module (1x1, 3x3, 5x5이 각각 크고 작은 region을 커버)
+2. 1과 관련해서 filter concatenation의 의미와 정확한 효과
+3. globally connected layer과 locally connected layer의 차이 : 
 
 ---
 
