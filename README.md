@@ -66,7 +66,7 @@ y : labels
 7. ```VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray x_train, y_train = np.array(xs[:idx]), np.array(labels[:idx])```  
 : 경고 무시했음, 동작은 됨
    
-### 2021.08.06
+### 2021.08.06 
 1. ```Dense(64, input_shape=(4,), activation='relu')```  
 - 유닛이 64개인건 이해 됨.
 - (입력층이) (4,0) 형태를 가진다고 책에 써있음. 처음에는 4가 batch size, 데이터 크기인가 싶었는데, 데이터 1개가 (4,0) 형태,, 컬럼 개수인가? 싶었음... 계속 헷갈림 이게

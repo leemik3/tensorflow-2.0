@@ -40,10 +40,6 @@ if gpus:
 
 
 # 모델 생성
-
-num_classes = 2
-
-
 class AlexNet(Sequential):
     def __init__(self, input_shape, num_classes):
         super().__init__()
@@ -70,6 +66,7 @@ class AlexNet(Sequential):
 
 
 # 모델 생성
+num_classes = 2
 model = AlexNet((100,100,3), num_classes)
 model.summary()
 
