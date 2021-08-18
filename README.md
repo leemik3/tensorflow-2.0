@@ -1,4 +1,4 @@
-# Deep Learning Study
+# Deep Learning
 - tensorflow 2.0 기준
 - 딥러닝 텐서플로 교과서
 - 딥러닝 이론, 텐서플로 코드 공부
@@ -92,6 +92,10 @@ y : labels
 2. 1과 관련해서 filter concatenation의 의미와 정확한 효과
 3. globally connected layer과 locally connected layer의 차이 : 
 
+### 2021.08.18
+1. 오토인코더와 변형오토인코더 논문 읽고 이해하기
+2. ```def __init__(self, **kwargs):```
+3. ```@tf.function```
 ---
 
 # tensorflow-2.0
@@ -630,4 +634,7 @@ ALU 개수가 많아지고, 캐시 메모리 비중이 낮아짐 (데이터를 �
 
 ---
 ### 변형 오토인코더 (Variational Autoencoder)
+오토 인코더 : 원래 이미지 - 인코더 - 압축 - 디코더 - 재구성된 이미지
+변형 오토 인코더 : 표준편차와 평균으로 확률 분포를 만들고, 거기에서 샘플링하여 디코더를 통과시켜 데이터 재구성. 입력 데이터와 조금 다른 출력 데이터 만들어낸다.
+
 
