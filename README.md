@@ -3,6 +3,7 @@
 - 딥러닝 텐서플로 교과서
 - 딥러닝 이론, 텐서플로 코드 공부
 - 2021/07~ 
+- [wiki](https://github.com/leemik3/tensorflow-2.0/wiki)에 개념 정리
 
 # Check
 - 어려웠던 것, 몰랐던 것, 헷갈렸던 것, etc
