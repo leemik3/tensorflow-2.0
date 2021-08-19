@@ -94,8 +94,12 @@ y : labels
 
 ### 2021.08.18
 1. 오토인코더와 변형오토인코더 논문 읽고 이해하기
-2. ```def __init__(self, **kwargs):```
+2. ```def __init__(self, **kwargs):``` : 딕셔너리 형태로 입력받기 위함 [wiki 참조](https://github.com/leemik3/python/wiki/*args---**kwargs)
 3. ```@tf.function```
+
+### 2021.08.19
+1. ```.shuffle(buffer_size=xxx)``` : buffer_size 만큼 가져와서 shuffle 
+2. ```.batch(batch_size)``` : batch_size 크기로 묶는다.
 ---
 
 # tensorflow-2.0
@@ -633,8 +637,37 @@ ALU 개수가 많아지고, 캐시 메모리 비중이 낮아짐 (데이터를 �
 2. binary cross entropy : 입력 값이 (0,1) 범위에 있는 경우
 
 ---
-### 변형 오토인코더 (Variational Autoencoder)
+### VAE : Variational Autoencoder (변형 오토인코더)
 오토 인코더 : 원래 이미지 - 인코더 - 압축 - 디코더 - 재구성된 이미지
 변형 오토 인코더 : 표준편차와 평균으로 확률 분포를 만들고, 거기에서 샘플링하여 디코더를 통과시켜 데이터 재구성. 입력 데이터와 조금 다른 출력 데이터 만들어낸다.
+
+---
+# Lecture : AutoEncoder and Variational AutoEncoder - 딥러닝 홀로서기
+- 오토인코더 개념이 어려워서 들음
+- link : https://www.youtube.com/watch?v=54hyK1J4wTc
+
+**기존 supervised learning** : loss function을 줄여나가는 방향으로 학습!  
+그런데 label이 없는 데이터는 loss function이 없는데? --> AutoEncoder 등장
+
+**AutoEncoder** : input data와 reconstructed input data와의 차이를 loss function으로!    
+따라서 loss function을 줄인다 = input data와 reconstructed input data와의 차이를 줄인다 = z 벡터에 중요한 feature만 남기는 방향으로 학습
+
+P<data>(x) -> z 벡터 -> <model>(x)
+
+Q. 어떤 확률 분포? A. reconstructed image 기준으로 이 이미지의 이 픽셀 value가 몇일 확률 (3 channel 이면 channel 별로 다 예측이겠지?)
+
+### Generative Models의 분류
+1. Explicit density estimation : p<model>(x)가 어떻게 생겼는지 정확히 정의할 수 있음
+   1. Tractable density : density를 계산할 수 있음  ex) PixelRNN/CNN
+   2. Approximate density : density를 가정하고 근사하는.. (뭐 이런) ex) Variational AutoEncoder, 
+2. Implicit density estimation : p<model>(x)가 어떻게 생겼는지는 모르겠지만 sampling은 할 수 있음
+[그림첨부]
+
+### Varirational Autoencoder (VAE)
+머리가 터져나가는 경험을 할 수 있을 것이다.. 라고 하심 하핳할
+- 응 멍 때리고 들었어~ 나중에 들어ㅠ 나중은.... 내일? ㅠㅠㅠㅠㅠㅠ
+
+
+
 
 

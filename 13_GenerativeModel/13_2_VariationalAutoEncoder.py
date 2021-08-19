@@ -47,10 +47,11 @@ train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype("fl
 test_images = test_images.reshape(test_images.shape[0], 28, 28, 1).astype("float32") / 255.0
 
 train_dataset = (
-    tf.data.Dataset.from_tensor_slices(train_images).shuffle(60000).batch(512)
+    tf.data.Dataset.from_tensor_slices(train_images).shuffle(buffer_size=60000).batch(512)
+    # 60000개 가져와서 랜덤셔플하고 512 batch_size 만큼으로 묶는다는 뜻인 듯
 )
 test_dataset = (
-    tf.data.Dataset.from_tensor_slices(test_images).shuffle(10000).batch(512)
+    tf.data.Dataset.from_tensor_slices(test_images).shuffle(buffer_size=10000).batch(512)
 )
 
 
@@ -99,3 +100,9 @@ class VAE(tf.keras.Model):
     def train(self, train_x):
         gradients = self.gradients(train_x)
         self.optimizer.apply_gradients(zip(gradients, self.trainable_variables))
+
+
+# 인코더와 디코더 네트워크 생성
+encoder = [
+    tf.keras.layers.InputLayer(input_shape=(28,28,1))
+]
