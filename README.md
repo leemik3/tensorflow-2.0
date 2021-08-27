@@ -566,11 +566,27 @@ Q. 어떤 확률 분포? A. reconstructed image 기준으로 이 이미지의 �
 2. Implicit density estimation : p<model>(x)가 어떻게 생겼는지는 모르겠지만 sampling은 할 수 있음
 [그림첨부]
 
-### Varirational Autoencoder (VAE)
-머리가 터져나가는 경험을 할 수 있을 것이다.. 라고 하심 하핳할
-- 응 멍 때리고 들었어~ 나중에 들어ㅠ 나중은.... 내일? ㅠㅠㅠㅠㅠㅠ
+---
+
+# Lecture Note : 오토인코더의 모든 것 - naver d2
+- 오토인코더 개념이 어려워서 들음
+- link : https://www.youtube.com/watch?v=o_peo6U7IRM
+
+## Autoencoder
+input과 output이 동일한 값을 가지도록 하는 네트워크면 Autoencoder라고 부름
+
+### Autoencoder의 Keywords
+1. Unsupervised learning
+2. Nonlinear dimensionality reduction  
+    = Representation Learning  
+    = Efficient coding learning  
+    = Feature Extraction  
+    = Manifold Learning  
+3. Generative model learning
+4. ML density estimation (Maximum Likelihood estimation)
+> 오토인코더 학습 시 : 학습방법은 **Unsupervised learning**을 따르며, loss는 negative ML로 해석된다. (**ML density estimation**)  
+> 학습된 오토인코더에서 : 인코더는 차원 축소 역할을 수행하며 (**Manifold Learning**), 디코더는 생성 모델 역할을 수행한다. (**Generative model learning**)
 
 
-
-
-
+## [CH1. Revisit Deep Neural Networks]
+Deep Neural Network를 학습시키는 거랑 Maximum Likelihood랑 같다
