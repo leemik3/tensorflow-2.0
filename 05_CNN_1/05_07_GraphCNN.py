@@ -13,8 +13,8 @@ chapter5. 합성곱 신경망 1
 '''
 5.5.2 그래프 신경망(GNN)
 
-1단계. 인접 행렬(adjacency matrix) : 노드 n개를 nXn 행렬로 표현
-2단계. 특성 행렬(feature matrix) : 
+1단계. 인접 행렬(adjacency matrix) : 노드 n개를 nXn 행렬로 표현, 연결 여부 표시
+2단계. 특성 행렬(feature matrix) : adjacency matrix + I (단위 행렬)
 '''
 
 '''

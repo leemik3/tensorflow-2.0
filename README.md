@@ -2,7 +2,7 @@
 - tensorflow 2.0 기준
 - 딥러닝 텐서플로 교과서
 - 딥러닝 이론, 텐서플로 코드 공부
-- 2021/07~ 
+- 2021/07 ~ 2021/08
 - [wiki](https://github.com/leemik3/tensorflow-2.0/wiki)에 개념 정리
 
 ---
